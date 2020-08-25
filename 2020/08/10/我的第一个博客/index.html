@@ -183,7 +183,7 @@
         
             <div class="header-content">
                 
-                <span class="header_title">Java基础知识</span></br>
+                <span class="header_title">Java高频面试知识点</span></br>
                 
                 <p id="hitokoto">一言加载中...</p>
             </div>
@@ -199,7 +199,363 @@
 <div>
   <div class="">
     <article class="article-content mdui-container mdui-center mdui-shadow-12">
-      
+      <p><strong>一、Java基础 部分</strong></p>
+<p>1、Java基本数据类型 </p>
+<p>有八种: 四种整数类型(byte、short、int、long),</p>
+<p>​       两种浮点数类型(double、float)</p>
+<p>​       一种字符类型char，一种布尔类型Boolean</p>
+<p>记忆：8位：Byte（字节型） 16位：short（短整型）、char（字符型）</p>
+<p>​      32位：int（整型）、float（单精度型/浮点型）</p>
+<p>​      64位：long（长整型）、double（双精度型）  最后一个：boolean(布尔类型)<br>2、基本数据类型和封装类的区别 </p>
+<p>原始类型是类,引用类型是对象</p>
+<p>原始类型大小比较用”==” , 引用类型大小比较用”equals”</p>
+<p>引用类型可以被序列化，原始类型不行。</p>
+<p>在集合类中只能使用引用类型，不能使用原始类型</p>
+<p>基本数据类型不用new，封装类需要new</p>
+<p>基本数据参数传递是以值传递，封装类型是以地址传递的<br>3、String、StringBuffer、StringBuilder区别 </p>
+<p>String是字符串常量，StringBuffer、StringBuilder是字符串变量，</p>
+<p>String创建的字符内容不可变(String底层char数组是final的)，StringBuffer、StringBuilder的字符内容是可加长的</p>
+<p>StringBuffer是线程安全的，StringBuilder线程不安全的，但是速度快(因为它不会为线程安全消耗性能)</p>
+<p>补充:<strong>String为什么不可变</strong></p>
+<p>虽然String、StringBuffer和StringBuilder都是final类，它们生成的对象都是不可变的，而且它们内部也都是靠char数组实现的，但是不同之处在于，String类中定义的char数组是final的，而StringBuffer和StringBuilder都是继承自AbstractStringBuilder类，它们的内部实现都是靠这个父类完成的，而这个父类中定义的char数组只是一个普通是私有变量，可以用append追加。因为AbstractStringBuilder实现了Appendable接口。</p>
+<p>4、运行时异常和非运行时异常区别 </p>
+<p>运行时异常是运行时报错:比如ClassCastException(类转换异常)、IndexOutOfBoundsException(数组越界)、NullPointerException(空指针)、ArrayStoreException(数据存储异常，操作数组时类型不一致)、IO操作的BufferOverflowException异常</p>
+<p>非运行时异常是还未运行可见的错误，可以try、catch捕获异常<br>5、简述一下面向对象的特征，并举例说明你对面向对象的理解 </p>
+<p>面向对象的特征归结为封装继承多态，把现实世界的事物的属性、行为特征抽象出来放到一个容器里(类)，比如人类，人的走、听、吃、说等动作可以归结为类里的方法，但又是人类的共同点，人有身高、体重归结为类里的属性</p>
+<p>封装:就是设计者把不愿意透露给使用者的那部分代码就是封装过的，通过修饰词private(权限最小)、public(权限最大)<br>     还用protected、default(属性前默认为该类型)，这些才能起到限制类对象权限的作用.<br>   继承:子类继承父类的过程，继承者可以拥有父类全部方法属性，<br>     好处提高代码复用性，子类只需要写特有的功能或者字段可以把公共的代码 抽出到父类里面<br>   多态:通过父类统一子类方法属性，然后通过调用，可以任意使用子类方法，优化代码量,原理是子类对父类方法进行重写<br>     左边某个变量编译期是一个类型，右边运行期是另一个类型父类 变量名 = new 子类();条件是一个建立在继承关系中<br>6、正则表达式的用法 </p>
+<p>定义要规范的字符串-&gt;制定规则-&gt;调用正则方法</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">示例:String str = &quot;dqwda16165&quot;; String 正则表达式=&quot;[a-z]*[0-9]+&quot;; system.out.println(str.matches(正则表达式)判断是否匹配)</span><br></pre></td></tr></table></figure>
+
+<p>7、Java 语言如何进行异常处理，关键字：throws、throw、try、catch、finally分别代表什么意义？finally代码是在return之后还是之前执行？ </p>
+<p>throws抛出所有可能异常 throw是抛出具体异常类型 try是将会发生异常的语句括起来，异常处理 catch是有异常就执行其它代码</p>
+<p>finally无论如何都会执行,如果在try或catch有return，return执行完会等待finally结束才返回;</p>
+<p>8、abstract class和interface有什么区别?接口可以继承接口吗？接口可以继承抽象类吗，为什么？</p>
+<p>抽象类和接口区别:抽象类里抽象方法必须被子类实现，抽象类可以继承多个抽象类，普通类只能单继承抽象类，不能有主方法，可以有普通方法，抽象方法默认被public abstract修饰</p>
+<p>接口类里只能写抽象方法，属性默认被*<strong>*public static final**</strong>修饰，多个接口可以被同一类实现，<br>9、构造器（constructor）是否可被重写（override）？ </p>
+<p>构造器（constructor）不能被继承，所有不能重写，但能重载(overloading)<br>10、是否可以继承String类？ </p>
+<p>public final class String extends Object，里边有final关键字，所以不能被继承。<br>11、Java 中的final关键字有哪些用法？ </p>
+<p>修饰的变量必须初始化或不能修改，修饰类不能被继承，修饰方法不能被重写<br>12、try{}里有一个return语句，那么紧跟在这个try后的finally{}里的代码会不会被执行，什么时候被执行，在return前还是后? </p>
+<p>会执行 会在return执行完之后还没返回结果之前执行，return会把返回结果放到函数栈等待finally执行完之后才真正的返回；<br>13、阐述final、finally、finalize的区别。</p>
+<p> final用于修饰类(不能继承)、变量(不能修改，只能赋值一次)、方法(不能重写)</p>
+<p>finally是用于try{}catch执行过程中有没有异常捕获都要执行的finally块，关闭资源等…</p>
+<p>finalize是方法名，对象遗言，用于在垃圾收集器回收清理对象之前要执行的方法,在object类定义的，所有类都继承了它<br>14、如何通过反射创建对象？ </p>
+<p>通过Class对象的newInstance()方法来创建Class对象对应类的实例</p>
+<p>使用Class对象获取指定的Constructor对象，调用Constructor对象的newInstance()方法来创建Class对象对应类的实例。<br>15、Java 8的新特性 </p>
+<p>一、Java 8引入了函数式接口的概念。Lambda允许把函数作为一个方法的参数，或者把代码看成数据。</p>
+<p>二、<strong>接口的默认方法与静态方法，</strong>在接口中定义默认方法，使用default关键字，并提供默认的实现。所有实现这个接口的类都会接受默认方法的实现，除非子类提供的自己的实现，在接口中定义静态方法，使用static关键字，也可以提供实现</p>
+<p>三、<strong>方法引用，结合</strong>Lambda表达式联合使用</p>
+<p>1.构造器引用。语法是Class::new </p>
+<p>2.静态方法引用。语法是Class::static_method</p>
+<p>3.特定类的任意对象方法引用。它的语法是Class::method</p>
+<p>4.特定对象的方法引用，它的语法是instance::method</p>
+<p>四、Java 8引入重复注解，相同的注解在同一地方可以声明多次。重复注解机制本身需要用@Repeatable注解。Java 8在编译器层做了优化，相同注解会以集合的方式保存，因此底层的原理并没有变化</p>
+<p>五、<strong>扩展注解的支持，j</strong>ava 8扩展了注解的上下文，几乎可以为任何东西添加注解，包括局部变量、泛型类、父类与接口的实现，连方法的异常也能添加注解</p>
+<p>六、引入<strong>Optional类，</strong>防止空指针异常，Optional类实际上是个容器：它可以保存类型T的值，或者保存null。使用Optional类我们就不用显式进行空指针检查了</p>
+<p>七、引入<strong>Stream</strong> API ，函数式编程风格，让代码变得连串支持连续、并行聚集操作，简单明了</p>
+<p>八、<strong>JavaScript引擎Nashorn，</strong>Nashorn允许在JVM上开发运行JavaScript应用，允许Java与JavaScript相互调用。</p>
+<p><strong>九、Base64，</strong>Base64类提供了对URL、MIME友好的编码器与解码器</p>
+<p><strong>十、Date/Time API (JSR 310)，</strong>提供了新的java.time包，可以用来替代 java.util.Date和java.util.Calendar，一般会用到Clock、LocaleDate、LocalTime、LocaleDateTime、ZonedDateTime、Duration这些类，对于时间日期的改进还是非常不错的；</p>
+<p>除了这十大新特性之外，还有另外的一些新特性：</p>
+<ul>
+<li><strong>更好的类型推测机制</strong>：Java 8在类型推测方面有了很大的提高，这就使代码更整洁，不需要太多的强制类型转换了。</li>
+<li><strong>编译器优化</strong>：Java 8将方法的参数名加入了字节码中，这样在运行时通过反射就能获取到参数名，只需要在编译时使用-parameters参数。</li>
+<li><strong>并行（parallel）数组</strong>：支持对数组进行并行处理，主要是parallelSort()方法，它可以在多核机器上极大提高数组排序的速度。</li>
+<li><strong>并发（Concurrency）</strong>：在新增Stream机制与Lambda的基础之上，加入了一些新方法来支持聚集操作。</li>
+<li><strong>Nashorn引擎jjs</strong>：基于Nashorn引擎的命令行工具。它接受一些JavaScript源代码为参数，并且执行这些源代码。</li>
+<li><strong>类依赖分析器jdeps</strong>：可以显示Java类的包级别或类级别的依赖。</li>
+<li><strong>JVM的PermGen空间被移除</strong>：取代它的是Metaspace（JEP 122）。</li>
+</ul>
+<p>16、Java数组和链表的两种结构的操作效率 </p>
+<p>数组效率高，数组底层是一个连续的内存空间，根据基地址和偏移量计算地址的；</p>
+<p>链表的数据是通过地址指向下一个数据地址找到的；<br>17、Java的引用类型有哪几种 </p>
+<p>强引用、弱引用、软引用、虚引用<br>二、多线程、IO、集合 部分<br>1、ArrayList、Vector、LinkedList的存储性能和特性 </p>
+<p>ArrayList是以数组形式存储对象，因为它是存放在连续位置上，插入和删除麻烦，但查询效率高，连续的数组有序的可以根据索引查找；</p>
+<p>LinkedList将对象存储在独立的空间，每个空间保留了下一个链接的索引，查询效率低，但修改、删除效率高</p>
+<p>Vector使用了Synchronized方法(线程安全的)，性能低于ArrayList</p>
+<p>补充:<strong>arraylist和vector的区别?</strong><br>同步性:Vector是线程安全的，也就是说是同步的，而ArrayList是线程不安全的，不是同步的<br>数据增长:当需要增长时,Vector默认增长为原来一培，而ArrayList却是原来的一半<br>2、List、Set、Map是否继承自Collection接口？</p>
+<p> List，Set是，Map不是<br>3、List、Map、Set三个接口存取元素时，各有什么特点？ </p>
+<p>List允许数据重复，有序的，调用get(index i)来明确说明取第几个。</p>
+<p>Set不允许重复数据，内部有排序，只能以Iterator接口取得所有的元素，再逐一遍历各个元素</p>
+<p>Map是通过键值对存储数据，键唯一的，相同数据会覆盖，用get(Object key)方法根据key获得相应的value<br>4、请说出与线程同步以及线程调度相关的方法。 </p>
+<p>wait()：使一个线程处于等待（阻塞）状态，并且释放所持有的对象的锁</p>
+<p>sleep()：使一个正在运行的线程处于睡眠状态，是一个静态方法，调用此方法要处理InterruptedException异常</p>
+<p>notify()：唤醒一个处于等待状态的线程，当然在调用此方法的时候，唤醒等待状态的线程不确定</p>
+<p>notityAll()：唤醒所有处于等待状态的线程，该方法并不是将对象的锁给所有线程，而是让它们竞争，只有获得锁的线程才能进入就绪状态；<br>5、编写多线程程序有几种实现方式？ </p>
+<p>java5 以前第一种是继承Thread类(单继承不推荐)、第二种实现Runnable接口，重写run，java5以后可以实现Callable接口，重写call函数<br>6、简述synchronized 和java.util.concurrent.locks.Lock的异同？ </p>
+<p>相同点:Lock有synchronized所有功能</p>
+<p>不同点:Lock比synchronized性能更好，线程语义更精准，synchronized是自动释放锁，Lock必须要在finally手动释放<br>7、hash碰撞以及hash算法、如何解决哈希冲突 </p>
+<p>解决hash冲突的方法：<br>开放定址法：一旦发生了冲突，就去寻找下一个空的散列地址，只要散列表足够大，空的散列地址总能找到，并将记录存入。没有空的位置就会进行扩容。</p>
+<p>链地址法：<br>将所有关键字为同义词的记录存储在一个单链表中，一旦发生冲突，在当前位置给单链表增加结点就行。<br>缺点：查找时需要遍历单链表的性能损耗。</p>
+<p>8、ArrayList和HashSet的区别,HashMap和Hashtable的区别? </p>
+<p>ArrayList是实现List接口，HashSet是实现Set接口</p>
+<p>ArrayList是数组存储。HashSet存储对象，具有HashMap的特性。</p>
+<p>ArrayList是有序可重复，HashSet是无序不可重复判断重复的标准是 equals方法 /hashCode方法</p>
+<p>HashSet和HashMap都是线程不安全的</p>
+<p>HashMap实现Map接口，HashSet是实现Set接口</p>
+<p>HashMap是键值对存储，键不能重复，值可以重复，而且查询速度比HashSet快，通过键查询值；</p>
+<p>11题关于第二个比较</p>
+<p>9、HashMap的存储原理，需要了解HashMap的源码。 </p>
+<p>HashMap底层是通过hash表数据结构实现的，该结构有数组的查询容易，又有链表的插入删除容易的特性；<br>10、ArrayList和LinkedList的各自实现和区别 </p>
+<p>都是List接口的实现，ArrayList底层是动态数组存储方式，LinkedList是双向链表存储方式</p>
+<p>ArrayList查询效率高，添加删除效率低</p>
+<p>LinkedList查询效率低，添加删除效率高<br>11、HashMap和HashTable区别 </p>
+<p>Hashtable继承自Dictionary类，而HashMap是Java1.2引进的Map interface的一个实现</p>
+<p>HashMap允许将null作为一个entry的key或者value，而Hashtable不允许</p>
+<p>HashMap是非synchronized，而Hashtable是synchronized</p>
+<p>两者通过hash值散列到hash表的算法不一样：HashTbale是古老的除留余数法，直接使用hashcode</p>
+<p>12、Hashtable,HashMap,ConcurrentHashMap 底层实现原理与线程安全问题 </p>
+<p>Hashtable线程安全的，</p>
+<ul>
+<li>底层数组+链表实现，无论key还是value都<strong>不能为null</strong>，线程<strong>安全</strong>，实现线程安全的方式是在修改数据时锁住整个HashTable，效率低，ConcurrentHashMap做了相关优化</li>
+<li>初始size为<strong>11</strong>，扩容：newsize = olesize*2+1</li>
+<li>计算index的方法：index = (hash &amp; 0x7FFFFFFF) % tab.length</li>
+</ul>
+<p>HashMap线程不安全的，</p>
+<ul>
+<li>底层数组+链表实现，可<strong>以存储null键和null值</strong>，线程<strong>不安全</strong></li>
+<li>初始size为<strong>16</strong>，扩容：newsize = oldsize*2，size一定为2的n次幂</li>
+<li>扩容针对整个Map，每次扩容时，原来数组中的元素依次重新计算存放位置，并重新插入</li>
+<li>插入元素后才判断该不该扩容，有可能无效扩容（插入后如果扩容，如果没有再次插入，就会产生无效扩容）</li>
+<li>当Map中元素总数超过Entry数组的75%，触发扩容操作，为了减少链表长度，元素分配更均匀</li>
+<li>计算index方法：index = hash &amp; (tab.length – 1)</li>
+</ul>
+<p>ConcurrentHashMap 线程安全的，</p>
+<ul>
+<li>底层采用分段的数组+链表实现，线程<strong>安全</strong></li>
+<li>通过把整个Map分为N个Segment，可以提供相同的线程安全，但是效率提升N倍，默认提升16倍。(读操作不加锁，由于HashEntry的value变量是 volatile的，也能保证读取到最新的值。)</li>
+<li>Hashtable的synchronized是针对整张Hash表的，即每次锁住整张表让线程独占，ConcurrentHashMap允许多个修改操作并发进行，其关键在于使用了锁分离技术</li>
+<li>有些方法需要跨段，比如size()和containsValue()，它们可能需要锁定整个表而而不仅仅是某个段，这需要按顺序锁定所有段，操作完毕后，又按顺序释放所有段的锁</li>
+<li>扩容：段内扩容（段内元素超过该段对应Entry数组长度的75%触发扩容，不会对整个Map进行扩容），插入前检测需不需要扩容，有效避免无效扩容</li>
+</ul>
+<p>13、Hash冲突怎么办？哪些解决散列冲突的方法？ </p>
+<p>开放定址法：一旦发生了冲突，就去寻找下一个空的散列地址，只要散列表足够大，空的散列地址总能找到，并将记录存入。没有空的位置就会进行扩容。</p>
+<p>链地址法：<br>将所有关键字为同义词的记录存储在一个单链表中，一旦发生冲突，在当前位置给单链表增加结点就行。<br>缺点：查找时需要遍历单链表的性能损耗。</p>
+<p>14、讲讲IO里面的常见类，字节流、字符流、接口、实现类、方法阻塞。 </p>
+<p><strong>文件字节输入输出流 FileInputStream/FileOutputStream，</strong></p>
+<p><strong>文件字符流 FileReader/FileWriter</strong></p>
+<p>包装流<strong>PrintStream/PrintWriter/Scanner</strong></p>
+<p><strong>字符串输入输出流StringReader/StringWriter</strong></p>
+<p><strong>转换流InputStreamReader/OutputStreamReader</strong></p>
+<p><strong>缓存流BufferedReader/BufferedWriter ， BufferedInputStream/BufferedOutputStream</strong></p>
+<p>Flushable接口、Appendable接口、Readable接口</p>
+<p>  同步阻塞IO：在此种方式下，用户进程在发起一个IO操作以后，必须等待IO操作的完成，只有当真正完成了IO操作以后，用户进程才能运行。</p>
+<p>  异步阻塞NIO：此种方式下是指应用发起一个IO操作以后，不等待内核IO操作的完成，等内核完成IO操作以后会通知应用程序，这其实就是同步和异步最关键的区别，同步必须等待或者主动的去询问IO是否完成</p>
+<p>15、讲讲NIO。 </p>
+<p>14题有答案<br>16、递归读取文件夹下的文件，代码怎么实现 </p>
+<p>不好描述，设计一个方法传入文件路径，判断是否为空，不为空new File(testFileDir).listFiles();，然后再判断空，最后遍历是文本文件还是文件目录；<br>17、常用的线程池模式以及不同线程池的使用场景 </p>
+<p>newCachedThreadPool 执行很多短期异步的小程序或者负载较轻的服务器</p>
+<p>newFixedThreadPool 执行长期的任务，性能好很多</p>
+<p>newSingleThreadExecutor 一个任务一个任务执行的场景</p>
+<p>NewScheduledThreadPool 周期性执行任务的场景</p>
+<p>线程池任务执行流程：</p>
+<ol>
+<li>当线程池小于corePoolSize时，新提交任务将创建一个新线程执行任务，即使此时线程池中存在空闲线程。</li>
+<li>当线程池达到corePoolSize时，新提交任务将被放入workQueue中，等待线程池中任务调度执行</li>
+<li>当workQueue已满，且maximumPoolSize&gt;corePoolSize时，新提交任务会创建新线程执行任务</li>
+<li>当提交任务数超过maximumPoolSize时，新提交任务由RejectedExecutionHandler处理</li>
+<li>当线程池中超过corePoolSize线程，空闲时间达到keepAliveTime时，关闭空闲线程</li>
+<li>当设置allowCoreThreadTimeOut(true)时，线程池中corePoolSize线程空闲时间达到keepAliveTime也将关闭</li>
+</ol>
+<p>18、newFixedThreadPool此种线程池如果线程数达到最大值后会怎么办，底层原理。 </p>
+<p>设置固定尺寸的线程池、可变尺寸连接池</p>
+<p>创建线程池方法：</p>
+<p>固定大小的线程池，ExecutorService pool = Executors.newFixedThreadPool(5)</p>
+<p>单任务线程池，ExecutorService pool = Executors.newSingleThreadExecutor()</p>
+<p>可变尺寸的线程池，ExecutorService pool = Executors.newCachedThreadPool()</p>
+<p>延迟连接池，ExecutorService pool = Executors.newScheduledThreadPool(2)</p>
+<p>如果当前线程数小于指定的最大数量则创建新的线程执行任务，否则加入到缓冲队列workQueue</p>
+<p>最终是把需要执行的线程放到一个工作线程workers HashSet里面。这里的work与Thread是分离的，这样做的好处是，如果我们的业务代码，需要对于线程池中的线</p>
+<p>程，赋予优先级、线程名称、线程执行策略等其他控制时，可以实现自己的ThreadFactory进行扩展，无需继承或改写ThreadPoolExecutor<br>19、了解可重入锁的含义，以及ReentrantLock 和synchronized的区别 </p>
+<p>从名字上理解，ReenTrantLock的字面意思就是再进入的锁，其实synchronized关键字所使用的锁也是可重入的，两者关于这个的区别不大。两者都是同一个线程没进入一次，锁的计数器都自增1，所以要等到锁的计数器下降为0时才能释放锁。</p>
+<p>除了synchronized的功能，多了三个高级功能。<br>等待可中断，公平锁，绑定多个Condition。<br>\1. 等待可中断：在持有锁的线程长时间不释放锁的时候，等待的线程可以选择放弃等待，tryLock(long timeout, TimeUnit unit)<br>\2. 公平锁：按照申请锁的顺序来一次获得锁称为公平锁，synchronized的是非公平锁，ReentrantLock可以通过构造函数实现公平锁。new RenentrantLock(boolean fair)<br>\3. 绑定多个Condition：通过多次newCondition可以获得多个Condition对象，可以简单的实现比较负责的线程同步的功能，通过await(),signal();<br>20、atomicinteger和volatile等线程安全操作的关键字的理解和使用 </p>
+<p>volatile关键字</p>
+<p>　　volatile是一个特殊的修饰符，只有成员变量才能使用它，与Synchronized及ReentrantLock等提供的互斥相比，Synchronized保证了Synchronized同步块中变量的可见性，而volatile则是保证了所修饰变量的可见性。可见性指的是在一个线程中修改变量的值以后，在其他线程中能够看到这个值（在Java并发程序缺少同步类的情况下，多线程对成员变量的操作对其它线程是透明的（不可见））。因为volatile只是保证了同一个变量在多线程中的可见性，所以它更多是用于修饰作为开关状态的变量。</p>
+<p><strong>原子操作Atomic</strong></p>
+<p>　　Volatile变量可以确保先行关系，保证下一个读取操作会在前一个写操作之后发生(即写操作会发生在后续的读操作之前)，但它并不能保证原子性。例如用volatile修饰count变量，那么count++ 操作就不是原子性的。</p>
+<p>21、进程和线程的区别 </p>
+<p>进程是系统资源分配的最小单位，线程是程序执行的最小单位，一般启动一个进程就会分配一个空间地址，建立数据表来维护代码段、堆栈段和数据段；进程程序比较健壮，一个进程死掉不会影响到其它独立的进程，而线程死掉就会影响到整个进程；</p>
+<p>线程是在同一进程下共享全局变量和静态变量，进程是以IPC进行的；<br>22、同步和异步，阻塞和非阻塞 </p>
+<p>同步与异步<br>　　同步与异步是针对应用程序与内核的交互而言的。同步过程中进程触发IO操作并等待或者轮询的去查看IO操作是否完成。异步过程中进程触发IO操作以后，直接返回，做自己的事情，IO交给内核来处理，完成后内核通知进程IO完成。</p>
+<p>阻塞与非阻塞<br>　　应用进程请求I/O操作时，如果数据未准备好，如果请求立即返回就是非阻塞，不立即返回就是阻塞。简单说就是做一件事如果不能立即获得返回，需要等待，就是阻塞，否则就可以理解为非阻塞</p>
+<p>三、设计模式<br>1、简述一下你了解的设计模式。 </p>
+<p>单利模式用于不会频繁创建对象的场景，只能创建一个对象，节约内存，加快对象访问速度；</p>
+<p>工厂模式普通来说就是根据用户需求创建对象，对象方法是继承父类过来的；适配器模式就是多写一个实现类来继承，通过一个适配器类帮需要添加监听器的对象实现了监听器里所有方法;这个对象只需要实现它需要的方法。</p>
+<p>模板模式*<strong>\</strong>*相当于模版，并没有实现，需要具体的使用才能实现(按照一定规律才产生)，**<em>**</em>把几个对象相同的动作抽取到一个接口里，在接口定义动作执行顺序;对象执行动作时实现该接口的方法；最后创建环境测试对象的执行顺序调用动作方法;</p>
+<p>代理模式，代理一般是指为其他对象提供代理以控制对这个对象的访问，某些情形下，不适合直接引用目标对象或者不适合在其他对象中引用，则可以使用代理模式，以增强对主业务逻辑。</p>
+<p>装饰者模式，动态地给一个对象添加一些额外的职责。就增加功能来说，Decorator模式相比生成子类更为灵活。</p>
+<p>享元模式是结构型设计模式的一种，是池技术的重要实现方式，它可以减少应用程序创建的对象，降低程序内存的占用，提高程序的性能，用于大量出现相似的对象，缓冲池；</p>
+<p>观察者模式就是发布订阅模式，发布者发布信息，订阅者获取信息，订阅了就能收到信息，没订阅就收不到信息；<br>2、写出单利模式，懒汉和饿汉<br>四、JVM<br>1、描述一下JVM加载class文件的原理机制？ </p>
+<p>装载:查找和导入class文件;</p>
+<p>检查:载入的class文件数据的正确性;</p>
+<p>准备:为类的静态变量分配存储空间;</p>
+<p>解析:将符号引用转换成直接引用(这一步是可选的)</p>
+<p>初始化:初始化静态变量，静态代码块,在程序调用类的静态成员的时候开始执行，所以静态方法main()才会成为一般程序的入口方法。类的构造器也会引发该动</p>
+<p>2、Java 中会存在内存泄漏吗，请简单描述。 </p>
+<p>内存泄露就是指一个不再被程序使用的对象或变量一直在内存中占据着，<strong>java</strong>中内存泄露的发生场景，通俗地说，就是程序员可能创建了一个对象，以后一直不再使用这个对象，这个对象却一直被引用，即这个对象无用但是却无法被垃圾回收器回收的，这就是<strong>java</strong>中的内存泄露，如果一个外部类的实例对象的方法返回了一个内部类的实例对象，这个内部类对象被长期引用了，即使那个外部类实例对象不再被使用，但由于内部类持久外部类的实例对象，这个外部类对象将<strong>不会</strong>被垃圾回收，这也会造成内存泄露。<br>3、GC是什么？为什么要有GC？</p>
+<p>GC是垃圾收集的意思，用于防止内存泄露，有效的利用内存。垃圾回收器通常是作为一个单独的低优先级的线程运行，不可预知的情况下对内存堆中已经死亡的或者长时间没有使用的对象进行清除和回收，程序员不能实时的调用垃圾回收器对某个对象或所有对象进行垃圾回收 ；<br>4、JVM的内存模型（重要、GC算法、新生代、老年代、永久代等需要详细了解） </p>
+<p>新生代。新建的对象都是用新生代分配内存，Eden空间不足的时候，会把存活的对象转移到Survivor中，新生代大小可以由-Xmn来控制，也可以用-XX:SurvivorRatio来控制Eden和Survivor的比例</p>
+<p>旧生代。用于存放新生代中经过多次垃圾回收仍然存活的对象</p>
+<p>持久代（Permanent Space）实现方法区，主要存放所有已加载的类信息，方法信息，常量池等等。可通过-XX:PermSize和-XX:MaxPermSize来指定持久带初始化值和最大值。Permanent Space并不等同于方法区，只不过是Hotspot JVM用Permanent Space来实现方法区而已，有些虚拟机没有Permanent Space而用其他机制来实现方法区。</p>
+<p>标记-整理（Mark-Compact）<br>  此算法结合了“标记-清除”和“复制”两个算法的优点。也是分两阶段，第一阶段从根节点开始标记所有被引用对象，第二阶段遍历整个堆，把清除未标记对象并且把存活对象“压缩”到堆的其中一块，按顺序排放。此算法避免了“标记-清除”的碎片问题，同时也避免了“复制”算法的空间问题。</p>
+<p>5、GC的工作原理 </p>
+<p>GC通过每个对象有一个引用计数属性，新增一个引用时计数加1，引用释放时计数减1，计数为0时可以回收，GC是后台的守护进程，对于Java程序员来说，分配对象使用new关键字；释放对象时，只要将对象所有引用赋值为null，让程序不能够再访问到这个对象，我们称该对象为&quot;不可达的&quot;.GC将负责回收所有&quot;不可达&quot;对象的内存空间。 </p>
+<p>对于GC来说，当程序员创建对象时，GC就开始监控这个对象的地址、大小以及使用情况。通常，GC采用有向图的方式记录和管理堆（heap）中的所有对象。通过这种方式确定哪些对象是&quot;可达的&quot;，哪些对象是&quot;不可达的&quot;.当GC确定一些对象为&quot;不可达&quot;时，GC就有责任回收这些内存空间。但是，为了保证GC能够在不同平台实现的问题，Java规范对GC的很多行为都没有进行严格的规定。例如，对于采用什么类型的回收算法、什么时候进行回收等重要问题都没有明确的规定。因此，不同的JVM的实现者往往有不同的实现算法。这也给Java程序员的开发带来行多不确定性。<br>五、数据库<br>1、事务的ACID是指什么？ </p>
+<p><strong><em>*</em>*原子性(Atomicity):操作过程不可分割,要么都成功，要么都失败*\</strong>***</p>
+<p><strong><em>*</em>*一致性(Consistency):事物操作之后，操作前后数据不变;比如转账减少的跟增加的值不变*\</strong>***</p>
+<p><strong><em>*</em>*隔离性(Isolation):多个事物之间的操作是分隔的，互不干扰，*\</strong>*<strong>*<strong>\</strong>*如果有多个事务去操作同一个数据的时候，就会事务并发问题(抢购 秒杀)*\</strong>***</p>
+<p><strong><em>*</em>*持久性(Durability):成功的完成一个事物处理后，最终commit把数据将永久保存在数据库;*\</strong>***</p>
+<p>2、悲观锁和乐观锁的区别 </p>
+<p>悲观锁 就是很悲观，每次去拿数据的时候都认为别人会修改，每次获取数据前都要被加锁，</p>
+<p>乐观锁 就是很乐观，每次去拿数据的时候都认为别人不会修改，不会加锁，但是每次更新时都要判断是否被修改过，可以使用版本号判断；<br>3、Left join、right join、inner join区别 </p>
+<p>left join(左联接)    返回包括左表中的所有字段记录、只返回右表中和左表交集的记录，不匹配的部分显示null<br>right join(右联接)   返回包括右表中的所有记录和左表中联结字段相等的记录，不匹配的部分显示null<br>inner join(等值连接) 只返回两个表中联结字段相等的行<br>4、SQL优化 </p>
+<p><strong><em>\</em>DDL优化**</strong></p>
+<p>变多次索引维护为一次索引维护:插入数据禁用索引，插入后再开启；</p>
+<p>变多次唯一校验为一次唯一校验:关闭唯一校验，批量插入数据，插入后开启</p>
+<p>变多次事务提交为一次事务提交:把多条插入语句合并为一条</p>
+<p>在SQL中避免where或order by后经常出现的字段上建索引，出现&lt;&gt;、is null、in、not in、避免在 where 子句中使用 or 来连接条件、like前置匹配都会变成全表扫描，索引失效；</p>
+<p>5、redis缓存数据库，需要了解，什么是内存数据库，支持的数据类型 </p>
+<p>把经常使用的数据存放在内存中，全局共享，减少和数据库之间的交互频率，提升数据访问速度，主要用于应用程序全局共享缓存，常见的内存数据库有Redis、memcached、FastDB，支持的常用数据类型可以是键值对数据结构的value支持各种数据类型<br>6、单个索引、联合索引、主键索引 </p>
+<p>单个索引就是在一个列上面创建索引</p>
+<p>联合索引：索引可以覆盖多个数据列，如像INDEX(columnA, columnB)索引，这就是联合索引。</p>
+<p>主键索引：设定主键而创建的索引，把某个列设为主键的时候，数据库就会給改列创建索引(主键非空且唯一)<br>7、索引的数据结构 </p>
+<p>B-树、B+树、R-树、散列</p>
+<p>B-树结构支持插入、控制操作以及通过管理一系列树根状结构的彼此联通的节点中来做选择。B-树结构中有两种节点类型：索引节点和叶子节点。叶子节点是存储数据的，而索引节点是用来告诉用户存储在叶子节点中的数据的顺序，并帮助用户找到数据。</p>
+<p>B+树是B-树结构的增强版，尽管B+树支持B-树的所有特性，他们之间最显著的不同点在于B+树中底层数据是按照提及的索引列进行排序的。B+树还通过在叶子节点之间附加引用来优化扫描的性能。</p>
+<p>散列表数据结构是一个简单的概念，他将一种算法应用到给定值中以在底层数据存储系统中返回一个唯一的指针或位置。散列表的优点是始终以线性时间复杂度找到需要读取的行的位置，而不想B-树那样需要跨越多层节点来确定位置。</p>
+<p>R-树数据结构支持基于数据类型对集合数据进行管理。目前只有MyIsam使用R-树支持空间索引。使用空间索引也有很多限制，比如只支持唯一的NOT NULL列等。空间索引并不常用。<br>8、数据库的锁，行锁、表锁、悲观锁、乐观锁 </p>
+<p>表锁偏向ＭyISAM存储引擎，开销小，加锁快；无死锁；锁定粒度大，发生锁冲突的概率最高，并发度最低；</p>
+<p>偏向InnoDB存储引擎，开销大，加锁慢；会出现死锁；锁定粒度小，发生锁冲突的概率最低，并发度最高。</p>
+<p>InnoDB与MyISAM的最大不同有两点：一是支持事务；二是彩了行级锁</p>
+<p><strong>＃悲观锁**</strong>：进行业务操作前先加锁，即一锁二查三更新。**</p>
+<p><strong>＃乐观锁**</strong>：**<strong>先进行业务操作，不到万不得已不去拿锁。</strong></p>
+<p>六、框架<br>1、web Service 常用注解 客户端如何生成，还是手写 </p>
+<p>@WebService（serviceName=”PojoService”, portName=”PojoPort”, name=”PojoPortType”, targetNamespace=”http//:Pojo”）<br>　　serviceName 对应 <service name="PojoService"><br>　　portName 对应 <service>下的 <port name="PojoPort">　　　　　　　　　　<br>   name 对应 <portType name="PojoPortType"></p>
+<p>   targetNamespace 对应 targetNamespace=”http//:Pojo”</p>
+<p>定义schemaLocation的显示<br>@WebMethod（operationName=”queryPojo”,exclude=true）<br>    operationName 接口的方法名、exclude 用于阻止将某一继承方法公开为web服务，默认为false</p>
+<p>@WebResult（name=”returnWord”） 接口的返回值</p>
+<p>@WebParam（name=”cityName”）接口的参数</p>
+<p>2、mybatis处理大数据 </p>
+<p>分表分为水平分表(hash分表、时间、区间分表)、垂直分表(不常用字段单独表)，比如区间分表，有跨表查询情况使用关键字 union union all<br>3、AOP IOC优点缺点 </p>
+<p>AOP缺点:性能略低,仅适用于方法调用,必须在Spring容器</p>
+<p>AOP优点:从Ioc容器中直接获得一个对象然后直接使用，无需事先创建，让逻辑业务分解，解耦代码，改变了OOP(Object Oriented Programming)面向对象编程的不足</p>
+<p>IOC缺点:生成一个对象的步骤变复杂了（忽略），缺少IDE重构的支持，如果修改了类名，还需到<a target="_blank" rel="noopener" href="https://www.baidu.com/s?wd=XML%E6%96%87%E4%BB%B6&tn=SE_PcZhidaonwhc_ngpagmjz&rsv_dl=gh_pc_zhidao">XML文件</a>中手动修改，这似乎是所有XML方式的缺憾所在</p>
+<p>IOC优点:实现组件之间的解耦，提高程序的灵活性和可维护性<br>4、spring事务传播属性和隔离级别 </p>
+<p>NEVER    绝对不能有事物,不然报错,有事物的方法调用也不行;<br>REQUIRED 普通方法调用,单开事物,有事物方法调用,就用有事物方法的事物<br>REQUIRES_NEW 无论有没有事物的方法调用 我都坚持执行自己的事物<br>SUPPORTS 有事物的方法调用就用你的,没有就没事物</p>
+<p>Dirty Reads 脏读*<strong>\</strong>*:**<em>*</em>*<em>\</em>客户看到的不是数据库真实数据,解决 事物提交前,不允许其他事物访问修改过的值**<em>**</em></p>
+<p>Phantom Reads 幻像读：*<strong>\</strong>*一个事务读取到另一个事务里已插入的数据， 解决 其他事物处理完数据前,不允许添加新数据**<em>**</em></p>
+<p>Non-Repeatable Reads 不可重复读 ：*<strong>\</strong>*后续读取数据读取到其它事务已提交的更新数据，导致前后读取数据不一致,解决 读取数据在修改之后;**<em>**</em></p>
+<p>5、Web Service 客户端和服务端实现技术<br>待定…<br>6、Spring Mvc返回json技术 </p>
+<p>第一种 每个json视图controller配置一个Jsoniew</p>
+<p>第二种 使用JSON工具将对象序列化成json，常用工具Jackson，fastjson，gson</p>
+<p>第三种 利用spring mvc3的注解@ResponseBody</p>
+<p>7、Hibernate悲观锁和乐观锁 </p>
+<p>Hibernate悲观锁：在数据有加载的时候就给其进行加锁，直到该锁被释放掉，其他用户才可以进行修改，优点：数据的一致性保持得很好，缺点：不适合多个用户并发访问。当一个锁住的资源不被释放掉的时候，这个资源永远不会被其他用户进行修改，容易造成无限期的等待。</p>
+<p>Hibernate乐观锁：就是在对数据进行修改的时候，对数据才去版本或者时间戳等方式来比较，数据是否一致性来实现加锁。优点比较好。<br>8、Hibernate三种状态 </p>
+<p>临时状态:new的对象还未持久化，还没处于Session中</p>
+<p>持久状态:已经持久化，加入到session缓存冲，处于此状态的对象叫持久对象；</p>
+<p>游离状态:持久化对象脱离了Session的对象。如Session缓存被清空的对象。特点：已经持久化，但不在Session缓存中。处于此状态的对象叫游离对象；<br>9、hibernate和ibatis的区别 </p>
+<p>ibatis:开源项目上手简单，开发灵活,开发工作量大,大多自己写sql,很多配置文件</p>
+<p>Hibernate:开源的对象关系映射框架,开发效率高,但不能干扰sql,做优化程度较低</p>
+<p>10、讲讲mybatis连接池 </p>
+<p>常见的mybatis连接池有原生、c3p0、dbcp三类，通过工厂模式创建DataSource接口，它的实现有unpooledDataSource(不带连接池的数据源)，PooledDataSource(带连接池的数据源)，它们都可以通过对应的工厂类对象获取；</p>
+<p>拿PooledDataSource来说的话首先:需要一个连接数据库的对象，在执行SQL语句的时候获取java.sql.Connection连接对象</p>
+<p>其次:PooledDataSource数据源将Connection连接池对象包裹成PooledConnection对象放到了PoolState类型的容器中维护。 MyBatis将连接池中的连接池dui分为两种状态： 空闲状态（idle）和活动状态(active)，PooledConnection对象分别被存储到PoolState容器内的idleConnections和activeConnections两个List集合中：</p>
+<p>空闲(idle)状态就把PooledConnection对象被放置到idleConnections集合中，表示当前闲置的没有被使用的PooledConnection集合，调用PooledDataSource的getConnection()方法时，会优先从此集合中取PooledConnection对象。当用完一个java.sql.Connection对象时，MyBatis会将其包裹成PooledConnection对象放到此集合中。</p>
+<p>活动(active)状态下把PooledConnection对象被放置到名为activeConnections的ArrayList中，表示当前正在被使用的PooledConnection集合，调用PooledDataSource的getConnection()方法时，会优先从idleConnections集合中取PooledConnection对象,如果没有，则看此集合是否已满，如果未满，PooledDataSource会创建出一个PooledConnection，添加到此集合中，并返回；</p>
+<p>11、SpringMVC的工作原理 </p>
+<p> 用户发送请求,被前端控制器DispatcherServlet捕获拦截;</p>
+<p>DispatcherServlet调用HandlerMapping处理器映射管理对象获得Handler处理器;</p>
+<p><strong><em>\</em>DispatcherServlet根据Handler去获取适合的适配器\</strong>*<em>\</em>*HandlerAdpter，**<em>*</em>*HttpMessageConveter将请求信息转换成指定的响应对象;****</p>
+<p><strong><em>*</em>*有了适配器,把*\</strong>*<em>*</em>***请求参数填充到Handler*****<em>*</em>**,spring就开始执行Handler(Controller)进行数据转换、数据验证、数据格式化操作**<em>**</em></p>
+<p><strong><em>*</em>*Handler执行完之后,向DispatcherServlet返回一个*\</strong>*<em>*</em>***ModelAndView*****<em>*</em>**对象;**<em>**</em></p>
+<p><strong><em>*</em>*根据返回的ModelAndView选择一个合适的*\</strong>*<em>*</em>***ViewResolver*****<em>*</em>**视图解析器,找到ModelAndView指定的视图;**<em>**</em></p>
+<p><strong><em>*</em>*ViewResolver结合*\</strong>*<em>*</em>***Model、View渲染显示页面;******** </p>
+<p>12、Spring的几种注入方式 </p>
+<p>注解注入、setter注入、构造器注入<br>13、Spring如何实现事务管理 </p>
+<p><strong>编程式事务管理</strong>：将事务管理代码嵌入到业务方法中来控制事务的提交和回滚，在编程式事务中，必须在每个业务操作中包含额外的事务管理代码</p>
+<p><strong>声明式事务管理</strong>：使用spring aop拦截器实现<br>14、Spring IOC和AOP的原理 </p>
+<p>IOC主要是帮我们创建对象和管理bean的容器，它控制反转就是把创建对象的权力交给ioc容器(spring容器)，启动spring的时候把xml和其它配置文件加载信息到ioc容器，ioc再建立注册信息表来管理，再通过注册表实力化成bean，把bean放到spring容器bean缓冲池(hashMap实现)，然后使用bean直接从缓存池取；记住:spring的配置文件用于描述bean关系的，利用反射功能建立bean依赖关系；</p>
+<p>Spring AOP底层是动态代理，动态代理分为jdk代理和cglib代理，jdk代理要求代理的类必须有父类接口，它主要通过Proxy和InvocationHandler接口，实现InvocationHandler接口并实现它的invoke方法，该方法传入参数有接口对象和接口方法，然后通过反射创建代理对象(需要传入两个参数一个是当前调用类的实例，一个是实现InvocationHandler的实例并传入接口)<br>七、算法和数据结构<br>1、写出快速排序和冒泡排序算法 </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MaoPao</span></span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    int[] x=&#123;1,2,3,4,5,6&#125;;</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    用冒泡排序排列出来</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            <span class="keyword">int</span>[] pp=&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>&#125;;<span class="comment">//准备数组</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">                    pai(pp);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            String x=java.util.Arrays.toString(pp);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">                System.out.println(x);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">pai</span><span class="params">(<span class="keyword">int</span>[] arr)</span></span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">                    <span class="keyword">int</span> temp=<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;arr.length;i++)&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">                    <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;arr.length-<span class="number">1</span>;j++)&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">                        <span class="keyword">if</span>(arr[j]&lt;arr[j+<span class="number">1</span>])&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">                            temp=arr[j+<span class="number">1</span>];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">                            arr[j+<span class="number">1</span>]=arr[j];</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">                            arr[j]=temp;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">                        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">快速排序</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> * 查找出中轴（默认是最低位low）的在numbers数组排序后所在位置</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> numbers 带查找数组</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> low 开始位置</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> high 结束位置</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> 中轴所在位置</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getMiddle</span><span class="params">(<span class="keyword">int</span>[] numbers, <span class="keyword">int</span> low,<span class="keyword">int</span> high)</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> <span class="keyword">int</span> temp = numbers[low]; <span class="comment">//数组的第一个作为中轴</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> <span class="keyword">while</span>(low &lt; high)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> <span class="keyword">while</span>(low &lt; high &amp;&amp; numbers[high] &gt; temp)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  high--;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> numbers[low] = numbers[high];<span class="comment">//比中轴小的记录移到低端</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> <span class="keyword">while</span>(low &lt; high &amp;&amp; numbers[low] &lt; temp)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  low++;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> numbers[high] = numbers[low] ; <span class="comment">//比中轴大的记录移到高端</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> numbers[low] = temp ; <span class="comment">//中轴记录到尾</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> <span class="keyword">return</span> low ; <span class="comment">// 返回中轴的位置</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>八、Linux基础<br>1、常用命令 </p>
+<p>解压文件 tar -zxvf 文件名.tar.gz</p>
+<p>rm -rf 文件名或文件名/* 强制暴力删除</p>
+<p>tail -n 3 -f 1.txt  //动态显示文件后3行内容（查看最新日志（实时更新））</p>
+<p>mv 文件1 文件2 移动文件命令</p>
+<p>ls -l //以详细信息方式列出文件信息</p>
+<p>ls 目录名  //查看该目录的文件信息</p>
+<p>whoami   //查看当前操作用户</p>
+<p>who am i  //查看当前登录用户(有可能是有多个的)的信息</p>
+<p>su - root //切换到root用户和su - 一样</p>
+<p>mkdir 目录名  //创建一个目录</p>
+<p>mkdir -p 目录1/目录2/目录3  //递归创建目录</p>
+<p><strong><em>*</em>***cp -rf dir1/* dir2 //直接复制内容（非常重要）**\</strong>****</p>
+<p>echo hello &gt; 1.txt   //以覆盖写的方式将hello字符添加到文件1.txt</p>
+<p>echo world &gt;&gt; 1.txt   //以追加的方式将world字符添加到文件1.txt</p>
+<p>cat 2.txt &gt; 1.txt  //将2.txt文件的内容覆盖到1.txt</p>
+<p>cat 2.txt &gt;&gt; 1.txt    //将2.txt文件的内容追加到1.txt</p>
+<p>-———————————————————-</p>
+<p>ubuntu远程访问Linux的终端常用命令</p>
+<p>ssh localhost 判断是否安装远程服务安全协议命令</p>
+<p>sudo apt-get install openssh-server 安装ssh的服务器端命令</p>
+<p>sudo apt-get update 更新软件源命令</p>
+<p>sudo  /etc/init.d/ssh restart 启动ssh-server命令</p>
+<p>sudo passwd root 设置root密码命令</p>
+<p>su root  命令行切换到root命令</p>
+<p>sudo gedit 文件路径 修改文件命令<br>2、Linux文件权限 </p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/0xcafedaddy/p/7132860.html">https://www.cnblogs.com/0xcafedaddy/p/7132860.html</a><br>3、端口占用 </p>
+<p>netstat -ano，列出所有端口的情况</p>
+<p>netstat -aon | findstr 端口号 占用查看</p>
+<p>taskkill /pid 被占用端口号 /F 解除端口占用<br>九、项目经验面试真题<br>1、浏览器访问<a target="_blank" rel="noopener" href="http://www.taobao.com,经历了怎样的过程./">www.taobao.com，经历了怎样的过程。</a> </p>
+<p>待定…<br>2、高并发情况下，我们系统是如何支撑大量的请求的 </p>
+<p>一、使用消息队列来存放请求；</p>
+<p>二、可以做多机集群，利用负载均衡原理分配每个数据库的职责；</p>
+<p>三、使用Redis缓存，减少对数据库的请求访问，能使用静态页面的地方尽量使用，减少容器的解析（尽量将动态内容生成静态html来显示）；<br>3、集群如何同步会话状态 </p>
+<p>一般集群都是主从数据库原则，在主方会配置一个授权账号生成的二进制文件，传入的数据都保存到二进制文件上，从方会用根据授权账号信息读取二进制文件进行写操作写到它自己的文件下，<br>4、负载均衡的原理 </p>
+<p>会向外暴露虚拟的端口号和ip，在配置文件里会设置一个共享账号来管理集群，并且根据ip分配职责，当有请求的时候会判断什么业务操作，根据业务不同可以分发不同的数据库访问路径，做到读写分离，负载均衡器一般还有备用均衡器防止单点故障；<br>5、如果有一个特别大的访问量，到数据库上，怎么做优化（DB设计，DBIO，SQL优化，Java优化）<br>设计缓存，使用memcached、redis，读写分离，数据库优化（优化表结构、索引、查询语句等），使用集群，升级硬件，<br>6、手写斐波那契数列、递归查找文件<br>7、Mybatis的# $的区别 </p>
+<p>#生成sql是双引号拼接的数据，$是直接显示数据</p>
+<p>#可以防止注入，$不能，但在order by中就要使用$<br>8、prototype作用域的范围<br>9、Spring的动态代理 </p>
+<p>动态代理模式jdk代理要求代理的类必须有父类接口，它主要通过Proxy和InvocationHandler接口，实现InvocationHandler接口并实现它的invoke方法，该方法传入参数有接口对象和接口方法(通过反射调用方法)，然后使用spring的Proxy类创建代理对象时传入两个参数一个是当前调用类的实例，一个是实现InvocationHandler的实例并传入接口<br>10、手写生产者消费者模式 </p>
+<p>比如dubbo的提供者和消费者关系<br>11、分布式锁<br>12、死锁的原因以及如何避免 </p>
+<p>原因 当多个线程争夺资源造成的，比如买包子，你坚决买完包子再付钱，而老板坚决付完钱再卖，双方都不退让，造成死锁；</p>
+<p>加锁顺序 确保所有的线程都是按照相同的顺序获得锁</p>
+<p>死锁检测(每当一个线程获得了锁，会在线程和锁相关的数据结构中（map、graph等等）将其记下。除此之外，每当有线程请求锁，也需要记录在这个数据结构中)  </p>
+<p>加锁时限(在尝试获取锁的时候加一个超时时间，这就是在尝试获取锁的过程中若超过了这个时限该线程则放弃对该锁请求)<br>13、内存溢出的常见原因  java.lang.OutOfMemoryError: ……java heap space…..</p>
+<p>一 堆栈溢出数据得不到释放，访问量比较大比较久，垃圾回收器认为都是可用的数据，不去回收，从而导致内存溢出，溢出之前关键字报错java.lang.OutOfMemoryError:GC over head limit exceeded</p>
+<p>二 PermGen的溢出，可能是第三方包、代码、常量多或者通过动态代码加载等方法，导致常量池的膨胀，常用的手段是：增加-XX:PermSize和-XX:MaxPermSize的大小。</p>
+<p>三 可能是地址空间不够而导致，java.lang.OutOfMemoryError: request {} byte for {}out of swap</p>
+<p>四 无法为线程分配一块内存区域，这个要么是内存本身就不够，要么heap的空间设置得太大了，导致了剩余的内存已不够，线程本身要占用内存 java.lang.OutOfMemoryError: unable to create new native thread</p>
+<p>五 -Xss太小 java.lang.StackOverflowError<br>14、秒杀系统的设计</p>
+<p>简单模拟的秒杀场景源码:<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1-khb_lB1gtAPcA7Rsam_Wg">https://pan.baidu.com/s/1-khb_lB1gtAPcA7Rsam_Wg</a></p>
+<p>大概思路刚开始的时候是通过页面ajax请求访问到后台调用创建订单方法，先根据id查询出总库存数，销售初始值是0，如果总库存减去销售初始值0小于等于0的不满足就对库存+1，然后更新数据库返回一个result，判断result大于0就有库存调用insert方法，但有个安全问题就是当高并发的时候有可能拿到的是同一个数字去同时调用update方法更新数据库，然后就有些没有得到，为了解决这个问题当时他把悲观锁改变成乐观锁，就是通过版本号判断，当满足还有库存的情况下多个线程访问到同一地方，当第一个线程先调用update方法对version加1库存字段+1，当第二个线程进来时发现版本号改变了就找不到了，这样就保证了每个线程调用不一样的，但乐观锁不能解决高并发带来的问题，最后利用了redis的lpop的特点，当对一个集合存入多个值可以通过lpop把集合里的数据挨个儿弹出，lpop可以用来做抢购码，对redis的api基本操作方法做了封装，直接调用就行了，做那块主要写了两个方法，一个得到抢购码的方法，通过redis工具调用lpop方法弹出一个抢购码返回出去，并且通过前台传入的产品id结合用户存入到lset集合里作为日志，因为我们要查看哪个用户抢到了，还有一个方法就是用于生成抢购码的，它有两个参数一个是要生成多少抢购码随机数count、第二个参数是用户id，创建一个存储抢购码的listcode容器，通过循环count和UUID生成抢购码调用add添加到listcode集合里，在循环外面通过redis工具调用lsetList方法把listcode作为value，把用户id作为key。<br>15、100万条记录实现导出 </p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/happyljw/article/details/52809244">https://blog.csdn.net/happyljw/article/details/52809244</a><br>16、字符串的比较、反转 </p>
+<p>使用== 如果地址一样，则返回true，否则false<br>使用equals 如果内容一样，则返回true，否则false<br>使用compareTo 从开头字母比较，比较各个字符的 Unicode 值，比较结果如果是负数说明第一个数小于第二个，如果是整数说明大于第二个，如果返回的是0说明比较值相等；</p>
+<p>通过StringBuiler的reverse()的方法，最快的方式</p>
+<p>通过String类的charAt()的方法来获取字符串中的每一个字符，然后将其拼接为一个新的字符串<br>17、CountDownLatch的应用场景</p>
+<p>CountDownLatch是一个辅助类，能够使一个线程等待其他线程完成各自的工作后再执行，比如跑步比赛，第一名必须等待其它选手到达才统计排名</p>
+<p>CountDownLatch是通过一个计数器来实现的，计数器的初始值为线程的数量。每当一个线程完成了自己的任务后，计数器的值就会减1。当计数器值到达0时，它表示所有的线程已经完成了任务，然后在闭锁上等待的线程就可以恢复执行任务</p>
+<p>18、使用Redis遇到的问题，缓存穿透,瞬间并发,缓存雪崩，如何解决的？</p>
+<p>缓存穿透就是多个用户同时去redis请求数据，没有查询到，就要去数据库查询，数据库没有就不做缓存，导致每次请求都要去数据库访问；</p>
+<p>解决:缓存空对象. 将 null 变成一个值</p>
+<p>缓存雪崩就是redis里的数据有效时间同时失效，然后去查询数据库，所有的查询都落在数据库上，造成雪崩</p>
+<p>解决:加锁排队. 限流、缓存永远不过期、做二级缓存，或者双缓存策略</p>
+<p>19、实现*<strong>*SpringMvc拦截器的哪些方式**</strong></p>
+<p>有两种写法,一种是实现接口,另外一种是继承适配器类,然后在SpringMvc的配置文件中配置拦截器mvc:interceptors和mvc:interceptor即可</p>
+<p>20、如何解决跨域问题？</p>
+<p>一、动态创建script，script标签不受同源策略的限制</p>
+<p>二、后端转发请求</p>
+<p>三、JSONP的回调函数和数据。回调函数是当响应到来时要放在当前页面被调用的函数。数据就是传入回调函数中的json数据，也就是回调函数的参数了</p>
+<p>21、Redis如何解决掉电数据丢失问题</p>
+<p>rdb设置自动保存数据时间，只要有1个key改变 就保存数据文件</p>
+<p>aop启动redis服务就开始记录服务器执行的所有写操作命令，并在服务器启动时，通过重新执行这些命令来还原数据集,默认关闭该模式;默认开启的appendonly yes  yes 开启,no 关闭</p>
+<p>22、简单讲一下java的跨平台原理</p>
+<p>Java通过不同的系统、不同版本、不同位数的java虚拟机(jvm),来屏蔽不同的系统指令集差异而对外体统统一的接口(java API),对于我们普通的java开发者而言，只需要按照接口开发即可。如果我系统需要部署到不同的环境时，只需在系统上面按照对应版本的虚拟机即可</p>
+<p>23、*<strong>\</strong>*简单介绍一下activiti?**<em>**</em></p>
+<p>24、简单讲一下struts2的执行流程？</p>
+<p>浏览器发送请求经过一系列的过滤器到达核心过滤器(StrutsPrepareAndExecuteFilter)，核心过滤器ActionMapper判断当前请求是否要给某个action处理，如果不处理，走原来流程，如果要处理，则把请求交给Actionproxy处理，Actionproxy会通过ConfigurationManager这个对象去访问struts2.xml配置文件找到要哪个action类来处理，找到后通过创建ActionInvocation实例来调用action的方法，</p>
+
       
     <div class="mdui-container">
         <button class="mdui-center mdui-color-pink mdui-btn-icon mdui-btn mdui-btn-raised mdui-ripple"

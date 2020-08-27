@@ -388,7 +388,15 @@
 
 
 
-<h2 id="2、YAML语法："><a href="#2、YAML语法：" class="headerlink" title="2、YAML语法："></a>2、YAML语法：</h2><h3 id="1、基本语法"><a href="#1、基本语法" class="headerlink" title="1、基本语法"></a>1、基本语法</h3><p>k:(空格)v：表示一对键值对（空格必须有）；</p>
+<h2 id="2、YAML语法："><a href="#2、YAML语法：" class="headerlink" title="2、YAML语法："></a>2、YAML语法：</h2><h3 id="1、基本语法"><a href="#1、基本语法" class="headerlink" title="1、基本语法"></a>1、基本语法</h3><p>-使用缩进表示层级关系</p>
+<p>-缩进时不允许使用Tab键,只允许使用空格。</p>
+<p>缩进的空格数目不重要,只要相同层级的元素左侧对齐即可</p>
+<p>-大小写敏感</p>
+<p>2、YAML 支持的三种数据结构</p>
+<p>-对象:键值对的集合</p>
+<p>-数组:一组按次序排列的值</p>
+<p>-字面量:单个的、不可再分的值</p>
+<p>k:(空格)v：表示一对键值对（空格必须有）；</p>
 <p>以<strong>空格</strong>的缩进来控制层级关系；只要是左对齐的一列数据，都是同一个层级的</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">server:</span></span><br><span class="line">    <span class="attr">port:</span> <span class="number">8081</span></span><br><span class="line">    <span class="attr">path:</span> <span class="string">/hello</span></span><br></pre></td></tr></table></figure>
 
